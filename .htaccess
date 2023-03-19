@@ -1,0 +1,16 @@
+# Aktivieren der URL-Umschreibung
+RewriteEngine On
+
+# Schutz vor Verzeichnisauflistung
+Options -Indexes
+
+# Aktivieren der URL-Umschreibung für index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+
+# Schutz von Systemdateien und -verzeichnissen
+<FilesMatch "(^\.|config\.php|core|vendor)">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
